@@ -76,8 +76,7 @@ public class Almendarez_Galatea_proyectotienda {
                 System.out.println("desea hacer una compra?(si/no)");
                 String compraono = obj.next().toLowerCase();
                 while (compraono=="si"){
-                    
-                    System.out.println("Que tipo de cliente es?(a/b/c)");
+               System.out.println("Que tipo de cliente es?(a/b/c)");
                 String cliente= obj.next().toLowerCase();
                 System.out.println("|codigo| Producto | precio |"
                         + "\n|  1   | Azucar   |   30   |"
@@ -88,7 +87,12 @@ public class Almendarez_Galatea_proyectotienda {
                 int CodProd = obj.nextInt();
                System.out.println("funcion en progreso papu");
   
-               }
+               }      
+
+                    
+                }
+                
+               
             //definir cual fue el producto estrella
             if (compraazucar>compraavena && compraazucar> compratrigo && compraazucar>compramaiz){
                 
@@ -106,11 +110,6 @@ public class Almendarez_Galatea_proyectotienda {
                 produestrella=compramaiz;
                 System.out.println("su producto estrella fue el maiz con "+ compramaiz + "ventas");
             }
-   
-                    
-                }
-                
-                
             break;
 
         case 3://compras
@@ -156,8 +155,8 @@ public class Almendarez_Galatea_proyectotienda {
             System.out.println("REPORTES----");
             System.out.println("Dinero actual en la caja: " + dinerocaja);
             System.out.println("Numero de compras realizadas en el dia: " + comprasxdia);
-            System.out.println("Numero de ventas realizadas en el dia. " + ventasxdia );
-            
+            System.out.println("Numero de ventas realizadas en el dia: " + ventasxdia );
+            System.out.println("El producto estrella del dia fue: ");
             break;
         case 5://cierre de caja
             if(dinerocaja<=0){
