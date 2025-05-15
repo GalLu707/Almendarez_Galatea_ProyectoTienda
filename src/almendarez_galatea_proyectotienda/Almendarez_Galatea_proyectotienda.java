@@ -95,7 +95,8 @@ public class Almendarez_Galatea_proyectotienda {
                 }
                 
                 String repe="si";
-                //ahora siiiiiiii
+                //el whileeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee------------------------
+                
                 while(repe.equals("si")){
                     
                 //hace el print de los objetos que se tienen
@@ -125,7 +126,8 @@ public class Almendarez_Galatea_proyectotienda {
             }
             switch(CodProd){
                 case 1: 
-                  if(CodProd==codigoAzucar){
+                  if(CodProd==codigoAzucar){//azucaaaaaaaaaar
+                      
                       pafactura=precioUazucar*kgprod;
                       
                       if(kgprod>azucarcantidad){
@@ -140,12 +142,32 @@ public class Almendarez_Galatea_proyectotienda {
                       System.out.println("dondeeeeee"+ subtotal);
                       
                       System.out.println("cantidad de azucar"+ azucarcantidad);
-                  }  //----------------------
+                  }else if (CodProd==codigoAvena){ //avenaaaaaaaaaaaaa
+                      
+                      pafactura=precioUavena*kgprod;
+                      
+                      if(kgprod>avenacantidad){
+                          System.out.println("los kg exceden la cantidad disponible de producto :(");
+                          System.out.println(" producto disponible: "+ avenacantidad);
+                          compraavena+= kgprod;
+                          System.out.println("azucar comprada"+ compraazucar);
+                          
+                          break;
+                      }
+                      avenacantidad= avenacantidad -kgprod;
+                      subtotal=subtotal + pafactura;
+                      System.out.println("llevas"+ subtotal);
+                     // System.out.println("subtotal actual"+ subtotal);
+                      System.out.println("dondeeeeee"+ subtotal);
+                      
+                      System.out.println("cantidad de azucar"+ azucarcantidad);
+                  } //----------------------
                 case 2:
                     
                 case 3:
                 case 4:
-                    
+                default: 
+                    System.out.println("ingrese un codigo valido");
             }
             System.out.println("desea comprar mas productos?(si/no)");
             repe = obj.next().toLowerCase();
@@ -155,7 +177,9 @@ public class Almendarez_Galatea_proyectotienda {
    
         }//falta añadir que quite eso a las cantidades, que se añada a caja y que diga si se puede realizar la compra y que retorne al while
             
-           
+           if(subtotal <= 0){
+                break;
+           }
            
             //Descuentos--------------------------------------------------------------------------------------
             //condicion ya para el subtotal y total, los if que se nececitan para aplicar esto
@@ -185,12 +209,12 @@ public class Almendarez_Galatea_proyectotienda {
                 descuento = subtotal-calcudes;
                 System.out.println("descuento: "+ calcudes );
         }
-                 double calcuim= subtotal*0.07;
-                 double impuesto = subtotal+ calcuim;//este creo que me esta tronando
+                 double impuesto= descuento *0.07;
+                 //double impuesto = descuento + calcuim;//este creo que me esta tronando
 
                     
-                    System.out.println("asegurar impuesto"+ calcuim );//quitarlo luegp
-                    double total= subtotal-descuento+ calcuim;
+                    System.out.println("asegurar impuesto"+ impuesto );//quitarlo luegp
+                    double total= descuento + impuesto;
                     dinerocaja= dinerocaja+total;
                     System.out.println("su total fue de: "+ total);
                     System.out.println("dinero en caja actual. "+ dinerocaja);
@@ -336,6 +360,7 @@ public class Almendarez_Galatea_proyectotienda {
             System.out.println("9.$$Banco$$");
             int opcion7=obj.nextInt();
             if(opcion7 == 8){
+                
                 System.out.println("----------------\n los productos de los que dispone son:\n---------------- \nAzucar:"+ azucarcantidad +"\nAvena:"+ avenacantidad + "\nTrigo:"+ trigocantidad +"\nMaiz:"+ maizcantidad+ "\n----------------");
             }else if (opcion7 == 9){
                 System.out.println("La cantidad que tiene actualmente en el banco es de:"+ Bancopro+" lps");
