@@ -9,29 +9,31 @@ import java.util.Scanner;
 public class Almendarez_Galatea_proyectotienda {
     public static void main(String[] args) {
         
-    
+    //variables que tienen que ser "constantes"  
         Scanner obj = new Scanner(System.in);
         int opcion=0;
         double dinerocaja=0;
-         double azucarcantidad=0, avenacantidad=0, trigocantidad=0,maizcantidad=0;
+         double azucarcantidad=100, avenacantidad=0, trigocantidad=0,maizcantidad=0;
+         double stock= azucarcantidad+avenacantidad+trigocantidad+maizcantidad;
          //precios de lis productos 
          final int  precioUazucar=30,precioUavena=25, precioUtrigo=32, precioUmaiz=20;
          //codigos de los productos dados 
          int codigoAzucar=1, codigoAvena=2, codigoTrigo=3, codigoMaiz=4;
          double Bancopro=0;
-         boolean si =true;
-         boolean no=false;
         System.out.println("Bienvenido a la caja registradora de tu tienda");
                        
       while (opcion !=6){ 
           
-          
+          //Variableeees que cambian con el while
       int compraazucar=0, compraavena=0, compratrigo=0, compramaiz=0;
       int comprasxdia= 0;
       int ventasxdia=0;
       int produestrella;  
-          
-       //interfaz que se    
+      double gastoenventas= 0;
+      double ganancia=0;
+      
+      
+       //interfaz que se repite1
     System.out.println("---Interfaz---");
     System.out.println("1.Abrir caja");
     System.out.println("2.Ventas");
@@ -49,12 +51,10 @@ public class Almendarez_Galatea_proyectotienda {
         opcion = obj.nextInt();  
     }
    
-        
-     
-         
 
      switch(opcion){
-        case 1://abrir caja
+        case 1://abrir caja--------------------------------------------------------------------------------
+            System.out.println("---CAJA---");
                System.out.println("Cuanto dinero desea agregar a la caja?");
                double dineroagre= obj.nextDouble();
                dinerocaja += dineroagre;
@@ -65,35 +65,144 @@ public class Almendarez_Galatea_proyectotienda {
                System.out.println("su dinero actual es en caja es:." + dinerocaja+ "Lps."); 
            }
            break; 
+           
+           
+           
         case 2://ventas falta que se pueda hacer una venta como tal, faltan los impuestos y el descuento
-            if(dinerocaja<=0){
+            //---------------------------------------------------------------------------------------------
+            //condicional por la cual pasa antes de pedir al usuario que ingrese lo demas 
+            System.out.println("---VENTAS---");
+            if(dinerocaja<=0 ){
                 System.out.println("no puede acceder a esta funcion si no abrio caja primero");
                 break;
-                
-                
-                
-            }else{
-                System.out.println("desea hacer una compra?(si/no)");
-                String compraono = obj.next().toLowerCase();
-                while (compraono=="si"){
-               System.out.println("Que tipo de cliente es?(a/b/c)");
+            }else if(stock==0){
+                    System.out.println("no dispone de productos, no se puede acceder a esta funcion\n");
+                }
+            //las variables que van a cambiar dentro de ventas
+            boolean continuar= false;
+            double subtotal=5001;
+            while( continuar==true);{
+            
+            //aqui ya pregunta el tipo de cliente para las demas condicionales 
+            System.out.println("Que tipo de cliente es?(a/b/c)");
                 String cliente= obj.next().toLowerCase();
-                System.out.println("|codigo| Producto | precio |"
+                
+                //hace el print de los objetos que se tienen
+            System.out.println("|codigo| Producto | precio |"
                         + "\n|  1   | Azucar   |   30   |"
                         + "\n|  2   | Avena    |   25   |"
                         + "\n|  3   | Trigo    |   32   |"
-                        + "\n|  4   | Maiz     |   20   |");
-                System.out.println("Introduzca el codigo del producto que desea comprar");
-                int CodProd = obj.nextInt();
-               System.out.println("funcion en progreso papu");
-  
-               }      
-
-                    
-                }
+                        + "\n|  4   | Maiz     |   20   |\n ");
+                
+            System.out.println("Introduzca el codigo del producto que desea comprar");
+            int CodProd = obj.nextInt();    
+            if (cliente.equals("c") && CodProd != 4 ){
+                   System.out.println("no puede adquirir este producto :p");  
+                }// else if(cliente.equals("b") && CodPro>=3 && CodPro<=1)){}
+           
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        } 
+            //impuestoo
+            
+            
+            //condicion ya para el subtotal y total, los if que se nececitan para aplicar esto
+            double descuento=0;
+            if (subtotal>5000){
+                
+                System.out.println("Su compra excede los 5000 lps, se agrega un despuesnto de 10%");
+                double calcudes = subtotal* 0.10;
+                descuento = subtotal-calcudes;
+                System.out.println("descuento: " + calcudes);
+                System.out.println("su nuevo subtotal es"+ descuento);
+                
+                
+                break;
+            }else if (subtotal>=1000){
+                System.out.println("Su compra es de mas de 1000 lps, se le agrega un descuento del 5%\n");
+                double calcudes = subtotal* 0.05;
+                descuento = subtotal-calcudes;
+                System.out.println("descuento: "+ descuento);
                 
                
-            //definir cual fue el producto estrella
+                
+            }else{
+                System.out.println("su compra no excede los 999 lps, no aplica descuento");
+                double calcudes = subtotal* 0.00;
+                descuento = subtotal-calcudes;
+                System.out.println("descuento: "+ descuento);
+        }
+                
+
+                    System.out.println(""+ descuento );
+                
+            ventasxdia++;  
+            break;
+
+        case 3://compras-----------------------------------------------------------------------------------------------
+            System.out.println("---Compras---");
+            if(dinerocaja<=0){
+                System.out.println("no puede acceder a esta funcion si no abrio caja primero");
+                break;
+            }
+            
+            
+            //--------------------
+            System.out.print("              *****productos disponibles****"
+                    + "\n| Proveedor Tipo:a     | Proveedor Tipo:b     | Proveedor Tipo: c   |"
+                    + "\n| cod:1. Azucar__lps.25| cod:2. Avena__lps.20 | cod:2. Avena__lps.22|"
+                    + "\n| cod:4. Maiz____lps.18| cod:3. Trigo__lps.30 |                     |\n");
+            System.out.println("\na que tipo de proveedor le va a comprar?(a/b/c)");
+            String respuesta3 = obj.next().toLowerCase();
+            //---------------------
+           System.out.println("Ingrese el codigo del producto que desea comprar");
+            int codigopro = obj.nextInt();
+           
+            
+            switch(respuesta3){
+                case "a":
+                case "b":
+                case "c":
+                   if(respuesta3.equals("a") && (codigopro==2 || codigopro== 3)){
+                System.out.println("no puede comprar este producto"); 
+            }else if(respuesta3.equals("b") && (codigopro==1 || codigopro==4)){
+                System.out.println("no puede comprar este producto");
+            }else if(respuesta3.equals("c") && (codigopro==1 || codigopro== 3 || codigopro==4)){
+                System.out.println("no puede comprar este producto");
+            }else{
+                
+            }
+                   
+                default:
+                    System.out.println("elija una opcion valida...");
+                    
+                  break;         
+            }
+               /*if(){
+                   System.out.println("ingrese la cantidad del producto que va a comprar (kg.)");
+            float cantidadProduc= obj.nextFloat();
+
+               }*/
+               comprasxdia++;
+            break;
+
+        case 4://reportes-----------------------------------------------------------------------------------------------
+            System.out.println("REPORTES-------------------------");
+            System.out.println("Dinero actual en la caja: " + dinerocaja);
+            System.out.println("---------------------------------");
+            System.out.println("Numero de compras realizadas en el dia: " + comprasxdia);
+            System.out.println("Numero de ventas realizadas en el dia: " + ventasxdia );
+            System.out.println("---------------------------------");
+            while(ventasxdia<0){
+                 //definir cual fue el producto estrella
             if (compraazucar>compraavena && compraazucar> compratrigo && compraazucar>compramaiz){
                 
                 produestrella=compraazucar;
@@ -107,58 +216,16 @@ public class Almendarez_Galatea_proyectotienda {
                 produestrella=compratrigo;
                 System.out.println("su produccto estrella fue el trigo con "+ compratrigo + "ventas");
             }else{
-                produestrella=compramaiz;
-                System.out.println("su producto estrella fue el maiz con "+ compramaiz + "ventas");
+               produestrella=compramaiz;
+                   System.out.println("su producto estrella fue"+ produestrella +"con "+ compramaiz + " ventas");  
+                
             }
-            break;
-
-        case 3://compras
-            if(dinerocaja<=0){
-                System.out.println("no puede acceder a esta funcion si no abrio caja primero");
-                break;
             }
+           
             
-            System.out.print("              *****productos disponibles****"
-                    + "\n| Proveedor Tipo:a     | Proveedor Tipo:b     | Proveedor Tipo: c   |"
-                    + "\n| cod:1. Azucar__lps.25| cod:2. Avena__lps.20 | cod:2. Avena__lps.22|"
-                    + "\n| cod:4. Maiz____lps.18| cod:3. Trigo__lps.30 |                     |\n");
-            System.out.println("\na que tipo de proveedor le va a comprar?(a/b/c)");
-            String respuesta3 = obj.next().toLowerCase();
-            System.out.println("Ingrese el codigo del producto que desea comprar");
-            int codigopro = obj.nextInt();
-            switch(respuesta3){
-                case "a": 
-                    if( codigopro==codigoAvena || codigopro==codigoTrigo ){
-                        System.out.println("no puedes comprar este producto");
-                    }
-                    break;
-                case "b":
-                    if(codigopro==codigoAzucar || codigopro==codigoMaiz ){
-                        System.out.println("no puedes comprar este producto");
-                    }
-                    break;
-                case "c":
-                    if(codigopro==codigoAzucar || codigopro==codigoTrigo || codigopro==codigoMaiz ){
-                        System.out.println("no puedes comprar este producto");
-                    }
-                    break;
-                    
-                default: 
-                    System.out.println("su opcion no es valida, saliendo de compras");
-                    break;
-            }
-            System.out.println("ingrese la cantidad del producto que va a comprar (kg.)");
-            float cantidadProduc= obj.nextFloat();
-            
-
-        case 4://reportes
-            System.out.println("REPORTES----");
-            System.out.println("Dinero actual en la caja: " + dinerocaja);
-            System.out.println("Numero de compras realizadas en el dia: " + comprasxdia);
-            System.out.println("Numero de ventas realizadas en el dia: " + ventasxdia );
-            System.out.println("El producto estrella del dia fue: ");
             break;
-        case 5://cierre de caja
+        case 5://cierre de caja-----------------------------------------------------------------------------------------
+            System.out.println("---CIERRE DE CAJA---\n");
             if(dinerocaja<=0){
                 System.out.println("opcion invalida, todavia no hizo nadota en caja");
                 break;
@@ -166,8 +233,9 @@ public class Almendarez_Galatea_proyectotienda {
             }
             System.out.println("desea ingresar dinero al banco?(si/no)");
             String respuestabanco = obj.next().toLowerCase(); 
+            //el orden de los factores no altera el fucking producto
             double maximoban= dinerocaja*60/100;
-            
+             //se explica por si mismo es el limite de dinero que se puede ingresar en el banco 
             switch(respuestabanco){
                 case "si":
                      System.out.println("cuanto dinero desea ingresar al banco??");
@@ -191,9 +259,9 @@ public class Almendarez_Galatea_proyectotienda {
                     
                     break;
                     
-            }//termina el swt
+            }//termina el swt-
             break;
-        case 6://salir del sistema
+        case 6://salir del sistema-----------------------------------------------------------------------------------
             System.out.println("chaoooo ");
             break;
         case 7:
