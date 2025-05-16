@@ -14,7 +14,7 @@ public class Almendarez_Galatea_proyectotienda {
         int opcion=0;
         double dinerocaja=0;
          double azucarcantidad=0, avenacantidad=0, trigocantidad=0,maizcantidad=0;//estas variables 
-         double stock= azucarcantidad+avenacantidad+trigocantidad+maizcantidad;
+         
          //precios de lis productos 
          final int  precioUazucar=30,precioUavena=25, precioUtrigo=32, precioUmaiz=20;
          //codigos de los productos dados 
@@ -25,13 +25,14 @@ public class Almendarez_Galatea_proyectotienda {
       while (opcion !=6){ 
           
           //Variableeees que cambian con el while
+      double stock= azucarcantidad+avenacantidad+trigocantidad+maizcantidad;    
       double compraazucar=0, compraavena=0, compratrigo=0, compramaiz=0; 
       int comprasxdia= 0;//estas
       int ventasxdia=0;
       double produestrella;  
-      double gastoenventas= 0;//ete 
+      double gastoencompras= 0;
       double ganancia=0;
-      double cantidadventas=0, cantidadcompras=0;
+      double cantidadventas=0;
       double pafactura=0;
       
        //interfaz que se repite1
@@ -76,7 +77,7 @@ public class Almendarez_Galatea_proyectotienda {
             if(dinerocaja<=0 ){
                 System.out.println("no puede acceder a esta funcion si no abrio caja primero");
                 break;
-            }else if(stock==0){
+            }else if(stock<=0){
                     System.out.println("no dispone de productos, no se puede acceder a esta funcion\n");
                             break;
                 }
@@ -279,8 +280,8 @@ public class Almendarez_Galatea_proyectotienda {
                     System.out.println("\nsu total fue de: "+ total);
                    
                
-                    
-            cantidadventas= cantidadventas+ total;
+            ganancia=ganancia+total;     
+            cantidadventas= cantidadventas + total;
             ventasxdia++; 
             dinerocaja=+total;
             System.out.println("sus ventas esta ves fueron: "+ ventasxdia);
@@ -345,35 +346,62 @@ public class Almendarez_Galatea_proyectotienda {
                    
                    switch(codigopro){
                        case 1: //compra de azucar
-                           double precio= kgcompras*20;
+                           double precio= kgcompras*25;
                            if(dinerocaja<precio){
                                System.out.println("su compra no se puede realizar");
                                System.out.println("volviendo a caja");
                                break;
+                               
+                           }else{
+                            azucarcantidad= azucarcantidad+kgcompras;
+                           
+                           gastoencompras= gastoencompras + precio;
+                           comprasxdia++;
+                           
+                           dinerocaja=dinerocaja-precio;   
                            }
+                           
+                           
+                           break;
+                           
                            
                        case 2://compra de avena
                            
                            if(respuesta3.equals("b")){
                            //si el proveedor es el a tiene que tener uno diferente al c
+                           precio= kgcompras*20;
+                           
+                           if(dinerocaja<precio){
+                               System.out.println("su compra no se puede realizar");
+                               System.out.println("volviendo a caja");
+                               break;
+                           }else{
+                           avenacantidad= avenacantidad+kgcompras;
+                           
+                           gastoencompras= gastoencompras + precio;
+                           comprasxdia++;
+                           dinerocaja=dinerocaja-precio;
+                           break;  
+                           }
+                         
+                           //proceso por el que pasa si el proveedor no es b
+                       }else if(respuesta3.equals("c")){
+                           
                            precio= kgcompras*22;
                            
                            if(dinerocaja<precio){
                                System.out.println("su compra no se puede realizar");
                                System.out.println("volviendo a caja");
                                break;
+                           }else{
+                            avenacantidad= avenacantidad+kgcompras;
+                           gastoencompras= gastoencompras + precio;
+                           comprasxdia++;
+                           dinerocaja=dinerocaja-precio;
+                           break;   
                            }
                            
                            
-                       }else if(respuesta3.equals("c")){
-                           //proceso por el que pasa si el proveedor no es b
-                           precio= kgcompras*25;
-                           
-                           if(dinerocaja<precio){
-                               System.out.println("su compra no se puede realizar");
-                               System.out.println("volviendo a caja");
-                               break;
-                           }
                        }
                           
                            
@@ -383,6 +411,13 @@ public class Almendarez_Galatea_proyectotienda {
                                System.out.println("su compra no se puede realizar");
                                System.out.println("volviendo a caja");
                                break;
+                           }else{
+                           trigocantidad= trigocantidad+kgcompras;
+                           dinerocaja=dinerocaja-precio;
+                           gastoencompras= gastoencompras + precio;
+                           comprasxdia++;
+                              
+                           break;
                            }
                            
                        case 4://compra de maiz
@@ -391,21 +426,28 @@ public class Almendarez_Galatea_proyectotienda {
                                System.out.println("su compra no se puede realizar");
                                System.out.println("volviendo a caja");
                                break;
+                               
+                           }else{
+                             maizcantidad= maizcantidad+kgcompras;
+                           dinerocaja=dinerocaja-precio;
+                           gastoencompras= gastoencompras + precio;
+                           comprasxdia++;  
                            }
+                           
+                           
+                           break;
+                           
+                           
                        
                    }
                    
-                         
-            
-               
-               comprasxdia++;
             break;
 
         case 4://reportes-----------------------------------------------------------------------------------------------
             //
             //  REPORTES
             //
-            if(ventasxdia==0 || comprasxdia==0){
+            if(ventasxdia<=0 || comprasxdia<=0){
                 System.out.println("necesita al menos una compra o venta para crear un reporte :( ");
                 break;
             }
