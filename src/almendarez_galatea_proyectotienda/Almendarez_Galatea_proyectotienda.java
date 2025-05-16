@@ -302,48 +302,43 @@ public class Almendarez_Galatea_proyectotienda {
                     + "\n|----------------------|----------------------|---------------------|"
                     + "\n|   1   |Azucar__lps.25|   2   | Avena__lps.20| cod:2.|Avena__lps.22|"
                     + "\n|   4   |Maiz____lps.18|   3   |Trigo__lps.30 |       |              |\n");
-            System.out.println("\na que tipo de proveedor le va a comprar?(a/b/c)");
-            String respuesta3 = obj.next().toLowerCase();
-            if (respuesta3.equals("a")||respuesta3.equals("b")||respuesta3.equals("c")){
-                
-            }else{
-               System.out.println("este proveedor no existe, saliendo de compras"); 
-               break;
-            }
-                
             
-            //---------------------
+            System.out.println("\na que tipo de proveedor le va a comprar?(a/b/c)");
+            String respuesta3="lol";
+            while(respuesta3 != "a" ||respuesta3 != "b" ||"c" != respuesta3){  
+               respuesta3= obj.next().toLowerCase();
+                if (respuesta3.equals("a")||respuesta3.equals("b")||respuesta3.equals("c")){
+                break;
+            }else{
+                    System.out.println("proveedor no valido");
+                    System.out.println("vuelva a ingresar el tipo de proveedor");
+            }
+            }
+            //---------------------compra del producto
            System.out.println("Ingrese el codigo del producto que desea comprar");
             int codigopro = obj.nextInt();
-           // if (codigopro){
-                
-           // }
-           
+          
             
-            switch(respuesta3){
-                case "a":
-                case "b":
-                case "c":
+           
                    if(respuesta3.equals("a") && (codigopro==2 || codigopro== 3)){
-                System.out.println("no puede comprar este producto"); 
+                System.out.println("no puede comprar este producto1"); 
             }else if(respuesta3.equals("b") && (codigopro==1 || codigopro==4)){
-                System.out.println("no puede comprar este producto");
+                System.out.println("no puede comprar este producto2");
             }else if(respuesta3.equals("c") && (codigopro==1 || codigopro== 3 || codigopro==4)){
-                System.out.println("no puede comprar este producto");
+                System.out.println("no puede comprar este producto3");
+                 break; 
             }
                    
-                  break;         
-            }
-            switch(respuesta3){
-                case "a":
-                        
-                        
-            }
+                         
+            
                
                comprasxdia++;
             break;
 
         case 4://reportes-----------------------------------------------------------------------------------------------
+            //
+            //  REPORTES
+            //
             if(ventasxdia==0 || comprasxdia==0){
                 System.out.println("necesita al menos una compra o venta para crear un reporte :( ");
                 break;
