@@ -13,7 +13,7 @@ public class Almendarez_Galatea_proyectotienda {
         Scanner obj = new Scanner(System.in);
         int opcion=0;
         double dinerocaja=0;
-         double azucarcantidad=100, avenacantidad=0, trigocantidad=0,maizcantidad=0;//se necesitan estas
+         double azucarcantidad=10, avenacantidad=20, trigocantidad=30,maizcantidad=40;//se necesitan estas
          double stock= azucarcantidad+avenacantidad+trigocantidad+maizcantidad;
          //precios de lis productos 
          final int  precioUazucar=30,precioUavena=25, precioUtrigo=32, precioUmaiz=20;
@@ -25,10 +25,10 @@ public class Almendarez_Galatea_proyectotienda {
       while (opcion !=6){ 
           
           //Variableeees que cambian con el while
-      int compraazucar=0, compraavena=0, compratrigo=0, compramaiz=0; //junto con estas 
+      double compraazucar=0, compraavena=0, compratrigo=0, compramaiz=0; //junto con estas 
       int comprasxdia= 0;
       int ventasxdia=0;
-      int produestrella;  
+      double produestrella;  
       double gastoenventas= 0;
       double ganancia=0;
       double cantidadventas=0, cantidadcompras=0;
@@ -90,7 +90,7 @@ public class Almendarez_Galatea_proyectotienda {
                 if (cliente.equals("a")||cliente.equals("b")||cliente.equals("c")){
                     System.out.println("lets gooo");//quitar antes del proyecto, soloes para que valide
             }else {
-                    System.out.println("tipo de cliente invalido :p");
+                    System.out.println("tipo de cliente invalido :p, volviendo a interfaz");
                     break;
                 }
                 
@@ -100,26 +100,28 @@ public class Almendarez_Galatea_proyectotienda {
                 while(repe.equals("si")){
                     
                 //hace el print de los objetos que se tienen
-            System.out.println("|codigo| Producto | precio |"
-                        + "\n|  1   | Azucar   |   30   |"
-                        + "\n|  2   | Avena    |   25   |"
-                        + "\n|  3   | Trigo    |   32   |"
-                        + "\n|  4   | Maiz     |   20   |\n ");
-                
-            System.out.println("Introduzca el codigo del producto que desea comprar");
+            System.out.println("|codigo| Producto | precio |cliente|"
+                        + "\n|  1   | Azucar   |   30   |  a/b  |"
+                        + "\n|  2   | Avena    |   25   |  a/b  |"
+                        + "\n|  3   | Trigo    |   32   |  a/B  |"
+                        + "\n|  4   | Maiz     |   20   |  a/c  |\n ");
+            //Validacion de productos que puede comprar el usuario
+            System.out.println("Introduzca el codigo(numero) del producto que desea comprar");
             int CodProd = obj.nextInt();    
             if (cliente.equals("c") && CodProd != 4 ){
-                   System.out.println("no puede adquirir este producto :p"); 
+                   System.out.println("no puede adquirir este producto :p, volviendo a interfaz"); 
                    break;
                 }else if(cliente.equals("b") && CodProd >= 4 || CodProd <1){
-                    System.out.println("codigo no valido");
+                    System.out.println("no puede adquirir este producto, volviendo a interfaz");
                     break;
                 }else if(cliente.equals("a") && CodProd >4 || CodProd<1){
-                System.out.println("producto no valido");
+                System.out.println("producto no valido, volviendo a interfaz...");
                 break;
-        } 
+        }
             System.out.println("ingrese los kg que va a comprar del producto");
-            double kgprod = obj.nextDouble();
+                    System.out.println("si introduce un decimal en vez de punto(.) use coma(,)");
+            float kgprod = obj.nextFloat();
+            //valida que no vaya a ser menor de cero
             if(kgprod<=0){
                 System.out.println("ingrese una cantidad valida de producto");
                 break;
@@ -137,46 +139,84 @@ public class Almendarez_Galatea_proyectotienda {
                       }
                       azucarcantidad= azucarcantidad -kgprod;
                       subtotal=subtotal + pafactura;
-                      System.out.println("llevas"+ subtotal);
-                     // System.out.println("subtotal actual"+ subtotal);
-                      System.out.println("dondeeeeee"+ subtotal);
+                      //System.out.println("llevas"+ subtotal);
                       
-                      System.out.println("cantidad de azucar"+ azucarcantidad);
-                  }else if (CodProd==codigoAvena){ //avenaaaaaaaaaaaaa
+                      System.out.println("cantidad de azucar "+ azucarcantidad);
+                      compraazucar= compraazucar + kgprod;
+                  }
+                  
+                case 2:
+                    if (CodProd==codigoAvena){ //avenaaaaaaaaaaaaa
                       
-                      pafactura=precioUavena*kgprod;
+                      pafactura=precioUavena*kgprod;//
                       
                       if(kgprod>avenacantidad){
                           System.out.println("los kg exceden la cantidad disponible de producto :(");
                           System.out.println(" producto disponible: "+ avenacantidad);
                           compraavena+= kgprod;
-                          System.out.println("azucar comprada"+ compraazucar);
+                          System.out.println("azucar comprada"+ compraavena);
+                          
+                          break;
+                      }                      
+
+                      avenacantidad= avenacantidad -kgprod;
+                      subtotal=subtotal + pafactura;
+                      //System.out.println("llevas"+ subtotal);
+                      
+                      System.out.println("cantidad de avena"+ avenacantidad);
+                      compraavena=compraavena + kgprod;
+                  }
+                    
+                case 3:
+                    if (CodProd==codigoTrigo){ //trigoooooooooooooo
+                      
+                      pafactura=precioUtrigo*kgprod;//cambiar
+                      
+                      if(kgprod>trigocantidad){
+                          System.out.println("los kg exceden la cantidad disponible de producto :(");
+                          System.out.println(" producto disponible: "+ trigocantidad);
+                          compratrigo+= kgprod;
+                          //System.out.println("trigo comprado"+ compratrigo);
                           
                           break;
                       }
-                      avenacantidad= avenacantidad -kgprod;
+                      trigocantidad= trigocantidad -kgprod;
                       subtotal=subtotal + pafactura;
-                      System.out.println("llevas"+ subtotal);
-                     // System.out.println("subtotal actual"+ subtotal);
-                      System.out.println("dondeeeeee"+ subtotal);
+                      //System.out.println("llevas"+ subtotal);
                       
-                      System.out.println("cantidad de azucar"+ azucarcantidad);
-                  } //----------------------
-                case 2:
+                      System.out.println("cantidad de trigo"+ trigocantidad);
+                      compratrigo= compratrigo+ kgprod;
+                  }
                     
-                case 3:
                 case 4:
-                default: 
-                    System.out.println("ingrese un codigo valido");
+                    if (CodProd==codigoMaiz){ //finally maiz
+                      
+                      pafactura=precioUmaiz*kgprod;
+                      
+                      if(kgprod>maizcantidad){
+                          System.out.println("los kg exceden la cantidad disponible de producto :(");
+                          System.out.println(" producto disponible: "+ maizcantidad);
+                          compramaiz+= kgprod;
+                          System.out.println("maiz comprado"+ compramaiz);
+                          
+                          break;
+                      }
+                      maizcantidad=  maizcantidad -kgprod;
+                      subtotal=subtotal + pafactura;
+                      //System.out.println("llevas"+ subtotal);
+                      compramaiz=compramaiz+kgprod;
+                  }
             }
             System.out.println("desea comprar mas productos?(si/no)");
             repe = obj.next().toLowerCase();
             if (repe.equals("no")){
             break;
             }
+                    
    
         }//falta añadir que quite eso a las cantidades, que se añada a caja y que diga si se puede realizar la compra y que retorne al while
-            
+                
+                
            if(subtotal <= 0){
                 break;
            }
@@ -209,15 +249,31 @@ public class Almendarez_Galatea_proyectotienda {
                 descuento = subtotal-calcudes;
                 System.out.println("descuento: "+ calcudes );
         }
+                 System.out.println("-------FACTURA------ ");
+                    if(compraazucar>0){
+                        System.out.println("azucar: "+ compraazucar + "kg");
+                        System.out.println("precio unitario de la azucar: "+ precioUazucar+ ".Lps");
+                    }else if(compraavena>0){
+                        System.out.println("avena: "+ compraavena+ "kg");
+                        System.out.println("precio unitario de la avena: "+ precioUavena+ ".Lps");
+                    }else if(compratrigo>0){
+                        System.out.println("trigo: "+ compratrigo+ "kg");
+                        System.out.println("precio unitario del trigo: "+ precioUtrigo + ".Lps");
+                    }else if(compramaiz>0){
+                        System.out.println("maiz: "+ compramaiz+"kg");
+                        System.out.println("precio unitario del maiz: "+ precioUmaiz+ ".Lps");
+                    }
+            
+            
                  double impuesto= descuento *0.07;
                  //double impuesto = descuento + calcuim;//este creo que me esta tronando
 
-                    
-                    System.out.println("asegurar impuesto"+ impuesto );//quitarlo luegp
+                    System.out.println("\n\nimpuesto del 7%");
+                    System.out.println("total del impuesto: %.2f\\n"+ impuesto);//quitarlo luegp
                     double total= descuento + impuesto;
                     dinerocaja= dinerocaja+total;
-                    System.out.println("su total fue de: "+ total);
-                    System.out.println("dinero en caja actual. "+ dinerocaja);
+                    System.out.println("\nsu total fue de: "+ total);
+                   
                
                     
             cantidadventas= cantidadventas+ total;
