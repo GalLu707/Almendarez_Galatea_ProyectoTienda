@@ -13,23 +13,23 @@ public class Almendarez_Galatea_proyectotienda {
         Scanner obj = new Scanner(System.in);
         int opcion=0;
         double dinerocaja=0;
-         double azucarcantidad=0, avenacantidad=0, trigocantidad=0,maizcantidad=0;//se necesitan estas
+         double azucarcantidad=0, avenacantidad=0, trigocantidad=0,maizcantidad=0;//estas variables 
          double stock= azucarcantidad+avenacantidad+trigocantidad+maizcantidad;
          //precios de lis productos 
          final int  precioUazucar=30,precioUavena=25, precioUtrigo=32, precioUmaiz=20;
          //codigos de los productos dados 
-         int codigoAzucar=1, codigoAvena=2, codigoTrigo=3, codigoMaiz=4;//estas tmb ocupo
+         int codigoAzucar=1, codigoAvena=2, codigoTrigo=3, codigoMaiz=4;
          double Bancopro=0;
         System.out.println("Bienvenido a la caja registradora de tu tienda");
                        
       while (opcion !=6){ 
           
           //Variableeees que cambian con el while
-      double compraazucar=0, compraavena=0, compratrigo=0, compramaiz=0; //junto con estas 
-      int comprasxdia= 0;
+      double compraazucar=0, compraavena=0, compratrigo=0, compramaiz=0; 
+      int comprasxdia= 0;//estas
       int ventasxdia=0;
       double produestrella;  
-      double gastoenventas= 0;
+      double gastoenventas= 0;//ete 
       double ganancia=0;
       double cantidadventas=0, cantidadcompras=0;
       double pafactura=0;
@@ -319,15 +319,81 @@ public class Almendarez_Galatea_proyectotienda {
             int codigopro = obj.nextInt();
           
             
-           
-                   if(respuesta3.equals("a") && (codigopro==2 || codigopro== 3)){
-                System.out.println("no puede comprar este producto1"); 
-            }else if(respuesta3.equals("b") && (codigopro==1 || codigopro==4)){
-                System.out.println("no puede comprar este producto2");
-            }else if(respuesta3.equals("c") && (codigopro==1 || codigopro== 3 || codigopro==4)){
-                System.out.println("no puede comprar este producto3");
+           //valida si el proveedor tiene el producto
+                   if(respuesta3.equals("a") && (codigopro != 1 && codigopro!= 4)){
+                System.out.println("no puede comprar este producto, el proveedor no tiene tal producto"); 
+                System.out.println("saliendo de compras...");
+                break;
+            }else if(respuesta3.equals("b") && (codigopro!=2 && codigopro!=3)){
+                
+                System.out.println("no puede comprar este producto, el proveedor no tiene tal producto");
+                System.out.println("saliendo de compras...");
+                break;
+            }else if(respuesta3.equals("c") && (codigopro!=2)){
+                
+                System.out.println("no puede comprar este producto, el proveedor no tiene tal producto");
+                       System.out.println("saliendo de compras...");
                  break; 
-            }
+            } 
+                   
+                   System.out.println("cuantos kg desea comprar?"); //pide cantidad 
+                   double kgcompras=obj.nextDouble();
+                   if(kgcompras<=0){
+                System.out.println("ingrese una cantidad valida de producto... saliendo de compras");
+                break;
+            } 
+                   
+                   switch(codigopro){
+                       case 1: //compra de azucar
+                           double precio= kgcompras*20;
+                           if(dinerocaja<precio){
+                               System.out.println("su compra no se puede realizar");
+                               System.out.println("volviendo a caja");
+                               break;
+                           }
+                           
+                       case 2://compra de avena
+                           
+                           if(respuesta3.equals("b")){
+                           //si el proveedor es el a tiene que tener uno diferente al c
+                           precio= kgcompras*22;
+                           
+                           if(dinerocaja<precio){
+                               System.out.println("su compra no se puede realizar");
+                               System.out.println("volviendo a caja");
+                               break;
+                           }
+                           
+                           
+                       }else if(respuesta3.equals("c")){
+                           //proceso por el que pasa si el proveedor no es b
+                           precio= kgcompras*25;
+                           
+                           if(dinerocaja<precio){
+                               System.out.println("su compra no se puede realizar");
+                               System.out.println("volviendo a caja");
+                               break;
+                           }
+                       }
+                          
+                           
+                       case 3://compra de trigo
+                           precio= kgcompras*30;
+                           if(dinerocaja<precio){
+                               System.out.println("su compra no se puede realizar");
+                               System.out.println("volviendo a caja");
+                               break;
+                           }
+                           
+                       case 4://compra de maiz
+                           precio= kgcompras*18;
+                           if(dinerocaja<precio){
+                               System.out.println("su compra no se puede realizar");
+                               System.out.println("volviendo a caja");
+                               break;
+                           }
+                       
+                   }
                    
                          
             
