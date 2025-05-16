@@ -13,7 +13,7 @@ public class Almendarez_Galatea_proyectotienda {
         Scanner obj = new Scanner(System.in);
         int opcion=0;
         double dinerocaja=0;
-         double azucarcantidad=10, avenacantidad=20, trigocantidad=30,maizcantidad=40;//se necesitan estas
+         double azucarcantidad=0, avenacantidad=0, trigocantidad=0,maizcantidad=0;//se necesitan estas
          double stock= azucarcantidad+avenacantidad+trigocantidad+maizcantidad;
          //precios de lis productos 
          final int  precioUazucar=30,precioUavena=25, precioUtrigo=32, precioUmaiz=20;
@@ -78,6 +78,7 @@ public class Almendarez_Galatea_proyectotienda {
                 break;
             }else if(stock==0){
                     System.out.println("no dispone de productos, no se puede acceder a esta funcion\n");
+                            break;
                 }
             //las variables que van a cambiar dentro de ventas
             
@@ -85,7 +86,7 @@ public class Almendarez_Galatea_proyectotienda {
             
             
             //aqui ya pregunta el tipo de cliente para las demas condicionales 
-            System.out.println("Que tipo de cliente es?(a/b/c)");
+            System.out.println("----Que tipo de cliente es?(a/b/c)---");
                 String cliente= obj.next().toLowerCase();
                 if (cliente.equals("a")||cliente.equals("b")||cliente.equals("c")){
                     System.out.println("lets gooo");//quitar antes del proyecto, soloes para que valide
@@ -106,7 +107,7 @@ public class Almendarez_Galatea_proyectotienda {
                         + "\n|  3   | Trigo    |   32   |  a/B  |"
                         + "\n|  4   | Maiz     |   20   |  a/c  |\n ");
             //Validacion de productos que puede comprar el usuario
-            System.out.println("Introduzca el codigo(numero) del producto que desea comprar");
+            System.out.println("----Introduzca el codigo(numero) del producto que desea comprar----");
             int CodProd = obj.nextInt();    
             if (cliente.equals("c") && CodProd != 4 ){
                    System.out.println("no puede adquirir este producto :p, volviendo a interfaz"); 
@@ -118,14 +119,17 @@ public class Almendarez_Galatea_proyectotienda {
                 System.out.println("producto no valido, volviendo a interfaz...");
                 break;
         }
-            System.out.println("ingrese los kg que va a comprar del producto");
-                    System.out.println("si introduce un decimal en vez de punto(.) use coma(,)");
+                    System.out.println("");
+            System.out.println("----ingrese los kg que va a comprar del producto----");
+                    System.out.println("(si introduce un decimal en vez de punto(.) use coma(,))");
+                    System.out.println("(si ingresa un dato invalido se factura automaticamente)");
             float kgprod = obj.nextFloat();
             //valida que no vaya a ser menor de cero
             if(kgprod<=0){
                 System.out.println("ingrese una cantidad valida de producto");
                 break;
-            }
+            } 
+            //switch para el proceso de cada cosa
             switch(CodProd){
                 case 1: 
                   if(CodProd==codigoAzucar){//azucaaaaaaaaaar
@@ -293,17 +297,27 @@ public class Almendarez_Galatea_proyectotienda {
             //--------------------
             System.out.print("              *****productos disponibles****"
                     + "\n| Proveedor Tipo:a     | Proveedor Tipo:b     | Proveedor Tipo: c   |"
-                    + "\n| cod:1. Azucar__lps.25| cod:2. Avena__lps.20 | cod:2. Avena__lps.22|"
-                    + "\n| cod:4. Maiz____lps.18| cod:3. Trigo__lps.30 |                     |\n");
+                    + "\n|----------------------|----------------------|---------------------|"
+                    + "\n|codigo |    producto  |codigo |    producto  |codigo |  producto   |"
+                    + "\n|----------------------|----------------------|---------------------|"
+                    + "\n|   1   |Azucar__lps.25|   2   | Avena__lps.20| cod:2.|Avena__lps.22|"
+                    + "\n|   4   |Maiz____lps.18|   3   |Trigo__lps.30 |       |              |\n");
             System.out.println("\na que tipo de proveedor le va a comprar?(a/b/c)");
             String respuesta3 = obj.next().toLowerCase();
             if (respuesta3.equals("a")||respuesta3.equals("b")||respuesta3.equals("c")){
                 
-            }else 
-                System.out.println("respuesta ");
+            }else{
+               System.out.println("este proveedor no existe, saliendo de compras"); 
+               break;
+            }
+                
+            
             //---------------------
            System.out.println("Ingrese el codigo del producto que desea comprar");
             int codigopro = obj.nextInt();
+           // if (codigopro){
+                
+           // }
            
             
             switch(respuesta3){
@@ -316,20 +330,16 @@ public class Almendarez_Galatea_proyectotienda {
                 System.out.println("no puede comprar este producto");
             }else if(respuesta3.equals("c") && (codigopro==1 || codigopro== 3 || codigopro==4)){
                 System.out.println("no puede comprar este producto");
-            }else{
-                       System.out.println("Su producto fue ingresado con exito");
             }
                    
-                default:
-                    System.out.println("elija una opcion valida...");
-                    
                   break;         
             }
-               /*if(){
-                   System.out.println("ingrese la cantidad del producto que va a comprar (kg.)");
-            float cantidadProduc= obj.nextFloat();
-
-               }*/
+            switch(respuesta3){
+                case "a":
+                        
+                        
+            }
+               
                comprasxdia++;
             break;
 
