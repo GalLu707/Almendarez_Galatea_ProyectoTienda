@@ -13,26 +13,36 @@ public class Almendarez_Galatea_proyectotienda {
         Scanner obj = new Scanner(System.in);
         int opcion=0;
         double dinerocaja=0;
+        
+        //determinar cual fue mayor sin que tenga mas cosos de por medio o sea procesos
+        double azucarcompraa=0, avenacompraa=0, trigocomprao=0, maizcomprao=0;
+        double gastoazucar=0, gastoavena=0, gastotrigo=0, gastomaiz=0;
+        
          double azucarcantidad=0, avenacantidad=0, trigocantidad=0,maizcantidad=0;//estas variables 
          
-         //precios de lis productos 
+         //precios de los productos 
          final int  precioUazucar=30,precioUavena=25, precioUtrigo=32, precioUmaiz=20;
          //codigos de los productos dados 
          int codigoAzucar=1, codigoAvena=2, codigoTrigo=3, codigoMaiz=4;
          double Bancopro=0;
+         //abir y cerrar caja
+         boolean cajaabi = true;
         System.out.println("Bienvenido a la caja registradora de tu tienda");
-                       
+        double comprasxdia = 0;//compras realizadas al dia 
+        double ventasxdia = 0;//ventas realizadas    
+        double gastoencompras = 0;
+        double cantidadventas = 0;
+        double ganancia = 0;
+        int cajaabierta=0;
+        
       while (opcion !=6){ 
           
           //Variableeees que cambian con el while
       double stock= azucarcantidad+avenacantidad+trigocantidad+maizcantidad;    
       double compraazucar=0, compraavena=0, compratrigo=0, compramaiz=0; 
-      int comprasxdia= 0;//estas
-      int ventasxdia=0;
       double produestrella;  
-      double gastoencompras= 0;
-      double ganancia=0;
-      double cantidadventas=0;
+      
+      
       double pafactura=0;
       
        //interfaz que se repite1
@@ -44,10 +54,11 @@ public class Almendarez_Galatea_proyectotienda {
     System.out.println("---5.Cierre de caja");
     System.out.println("---6.Salir del sistema");
     System.out.println("---7. otras opciones \n");
-    System.out.println("Ingrese la opcion a la que quiere ingresar");
+    System.out.println("Ingrese la opcion a la que desea entrar");
+   
     if (obj.hasNextInt()){ //verifica que la opcion sea valida
         opcion = obj.nextInt();
-        obj.useDelimiter("\n");
+        obj.useDelimiter("\n"); //?? no recuerdo para que lo puse 
       }else{
         System.out.println("opcion no valida, saliendo del sistema \n");
         opcion = obj.nextInt();  
@@ -56,24 +67,41 @@ public class Almendarez_Galatea_proyectotienda {
 
      switch(opcion){
         case 1://abrir caja--------------------------------------------------------------------------------
+            if(opcion == 1){
+                cajaabi=true;
+               
+            }
             System.out.println("---CAJA---");
+            if(cajaabierta<=0){
                System.out.println("Cuanto dinero desea agregar a la caja?");
                double dineroagre= obj.nextDouble();
-               dinerocaja += dineroagre;
-           if (dineroagre <= 0){
+               dinerocaja += dineroagre; 
+             if (dineroagre <= 0){
                System.out.println("Tu cantidad es invalida, favor ingresar un numero valido");
 
-           } else {
+           }   
+               
+               
+            }
+               
+           else {
                System.out.println("su dinero actual es en caja es:." + dinerocaja+ "Lps."); 
            }
+           cajaabierta++;
            break; 
            
            
            
-        case 2://impuesto y descuento ya funcionan
+        case 2://impuesto y descuento ya funcionan creo
+            
+            ///VENTAAAAAAAAS
             //---------------------------------------------------------------------------------------------
             //condicional por la cual pasa antes de pedir al usuario que ingrese lo demas 
             System.out.println("---VENTAS---");
+            if(!cajaabi){
+                System.out.println("abra caja primero... ");
+                break;
+            }
             if(dinerocaja<=0 ){
                 System.out.println("no puede acceder a esta funcion si no abrio caja primero");
                 break;
@@ -148,6 +176,8 @@ public class Almendarez_Galatea_proyectotienda {
                       
                       System.out.println("cantidad de azucar "+ azucarcantidad);
                       compraazucar= compraazucar + kgprod;
+                      azucarcompraa= kgprod + azucarcompraa;
+                      
                   }
                   
                 case 2:
@@ -159,8 +189,8 @@ public class Almendarez_Galatea_proyectotienda {
                           System.out.println("los kg exceden la cantidad disponible de producto :(");
                           System.out.println(" producto disponible: "+ avenacantidad);
                           compraavena+= kgprod;
-                          System.out.println("azucar comprada"+ compraavena);
-                          
+                          System.out.println("avena comprada"+ compraavena);
+                          avenacompraa= avenacompraa+subtotal;
                           break;
                       }                      
 
@@ -170,6 +200,7 @@ public class Almendarez_Galatea_proyectotienda {
                       
                       System.out.println("cantidad de avena"+ avenacantidad);
                       compraavena=compraavena + kgprod;
+                      avenacompraa= avenacompraa+subtotal;
                   }
                     
                 case 3:
@@ -181,7 +212,8 @@ public class Almendarez_Galatea_proyectotienda {
                           System.out.println("los kg exceden la cantidad disponible de producto :(");
                           System.out.println(" producto disponible: "+ trigocantidad);
                           compratrigo+= kgprod;
-                          //System.out.println("trigo comprado"+ compratrigo);
+                        
+                  
                           
                           break;
                       }
@@ -191,6 +223,7 @@ public class Almendarez_Galatea_proyectotienda {
                       
                       System.out.println("cantidad de trigo"+ trigocantidad);
                       compratrigo= compratrigo+ kgprod;
+                      trigocomprao= trigocomprao+subtotal;
                   }
                     
                 case 4:
@@ -210,6 +243,7 @@ public class Almendarez_Galatea_proyectotienda {
                       subtotal=subtotal + pafactura;
                       //System.out.println("llevas"+ subtotal);
                       compramaiz=compramaiz+kgprod;
+                      maizcomprao=maizcomprao+subtotal;
                   }
             }
             System.out.println("desea comprar mas productos?(si/no)");
@@ -254,40 +288,59 @@ public class Almendarez_Galatea_proyectotienda {
                 descuento = subtotal-calcudes;
                 System.out.println("descuento: "+ calcudes );
         }
+            //
+            //    facturacion
+            //
                  System.out.println("-------FACTURA------ ");
                     if(compraazucar>0){
                         System.out.println("azucar: "+ compraazucar + "kg");
-                        System.out.println("precio unitario de la azucar: "+ precioUazucar+ ".Lps");
-                    }else if(compraavena>0){
+                        System.out.println("precio de la azucar: "+ precioUazucar+ ".Lps");
+                    } 
+                      
+                    if(compraavena>0){
                         System.out.println("avena: "+ compraavena+ "kg");
-                        System.out.println("precio unitario de la avena: "+ precioUavena+ ".Lps");
-                    }else if(compratrigo>0){
-                        System.out.println("trigo: "+ compratrigo+ "kg");
-                        System.out.println("precio unitario del trigo: "+ precioUtrigo + ".Lps");
-                    }else if(compramaiz>0){
-                        System.out.println("maiz: "+ compramaiz+"kg");
-                        System.out.println("precio unitario del maiz: "+ precioUmaiz+ ".Lps");
+                        System.out.println("precio de la avena: "+ precioUavena+ ".Lps");
                     }
+                        
+                    if(compratrigo>0){
+                        System.out.println("trigo: "+ compratrigo+ "kg");
+                        System.out.println("precio del trigo: "+ precioUtrigo + ".Lps");
+                    }
+                        
+                    if(compramaiz>0){
+                        System.out.println("maiz: "+ compramaiz+"kg");
+                System.out.println("precio del maiz: " + precioUmaiz + ".Lps");
+            }
+            double desc = subtotal - descuento;
             
-            
-                 double impuesto= descuento *0.07;
-                 //double impuesto = descuento + calcuim;//este creo que me esta tronando
+            System.out.println("subtotal: " + subtotal);
 
-                    System.out.println("\n\nimpuesto del 7%");
-                    System.out.println("total del impuesto: %.2f\\n"+ impuesto);//quitarlo luegp
-                    double total= descuento + impuesto;
-                    dinerocaja= dinerocaja+total;
-                    System.out.println("\nsu total fue de: "+ total);
-                   
-               
+            System.out.println("su descuento es de:" + desc + "lps.");
+            double impuesto = descuento * 0.07;
+            //double impuesto = descuento + calcuim;//este creo que me esta tronando
+
+            System.out.println("\n\nimpuesto del 7%");
+            System.out.println("total del impuesto:" + impuesto + " .LPS");//quitarlo luegp
+            
+            double total = descuento + impuesto;
+
+            System.out.println("\nsu total fue de: " + total + ".Lps");
+
+
             ganancia=ganancia+total;     
             cantidadventas= cantidadventas + total;
             ventasxdia++; 
-            dinerocaja=+total;
-            System.out.println("sus ventas esta ves fueron: "+ ventasxdia);
+            dinerocaja=dinerocaja+total;
+           
             break;
 
         case 3://compras-----------------------------------------------------------------------------------------------
+            if(opcion==3 && !cajaabi)
+            {
+                
+                System.out.println("abra caja primero");
+                break;
+            }
             System.out.println("---Compras---");
             if(dinerocaja<=0){
                 System.out.println("no puede acceder a esta funcion si no abrio caja primero");
@@ -355,9 +408,10 @@ public class Almendarez_Galatea_proyectotienda {
                            }else{
                             azucarcantidad= azucarcantidad+kgcompras;
                            
-                           gastoencompras= gastoencompras + precio;
-                           comprasxdia++;
+                           gastoencompras = + precio;
                            
+                           comprasxdia++;
+                           gastoazucar=gastoazucar+ precio;
                            dinerocaja=dinerocaja-precio;   
                            }
                            
@@ -377,7 +431,7 @@ public class Almendarez_Galatea_proyectotienda {
                                break;
                            }else{
                            avenacantidad= avenacantidad+kgcompras;
-                           
+                           gastoavena=gastoavena+precio;
                            gastoencompras= gastoencompras + precio;
                            comprasxdia++;
                            dinerocaja=dinerocaja-precio;
@@ -397,6 +451,7 @@ public class Almendarez_Galatea_proyectotienda {
                             avenacantidad= avenacantidad+kgcompras;
                            gastoencompras= gastoencompras + precio;
                            comprasxdia++;
+                           gastoavena=gastoavena+precio;
                            dinerocaja=dinerocaja-precio;
                            break;   
                            }
@@ -416,6 +471,7 @@ public class Almendarez_Galatea_proyectotienda {
                            dinerocaja=dinerocaja-precio;
                            gastoencompras= gastoencompras + precio;
                            comprasxdia++;
+                           gastotrigo=gastotrigo+precio;
                               
                            break;
                            }
@@ -431,10 +487,11 @@ public class Almendarez_Galatea_proyectotienda {
                              maizcantidad= maizcantidad+kgcompras;
                            dinerocaja=dinerocaja-precio;
                            gastoencompras= gastoencompras + precio;
-                           comprasxdia++;  
+                          comprasxdia++;
+                          gastomaiz=gastomaiz+precio;
                            }
                            
-                           
+                            
                            break;
                            
                            
@@ -447,6 +504,10 @@ public class Almendarez_Galatea_proyectotienda {
             //
             //  REPORTES
             //
+            if(!cajaabi){
+                System.out.println("no puede acceder a esta opcion si no abrio caja primero");
+                break;
+            }
             if(ventasxdia<=0 || comprasxdia<=0){
                 System.out.println("necesita al menos una compra o venta para crear un reporte :( ");
                 break;
@@ -457,9 +518,61 @@ public class Almendarez_Galatea_proyectotienda {
             System.out.println("Numero de compras realizadas en el dia: " + comprasxdia);
             System.out.println("Numero de ventas realizadas en el dia: " + ventasxdia );
             System.out.println("---------------------------------");
-            while(ventasxdia<0){
+            double gananciatotal= ganancia -gastoencompras;
+            if(gananciatotal<=0){
+                System.out.println("usted no posee ganancias");
+            }else{
+              System.out.println("Ganancias: "+ gananciatotal + "lps.");  
+            }       
+            System.out.println("---------------------------------");
+            System.out.println("volumen total de ventas: "+ ganancia+ "lps.");
+            System.out.println("volumen total de compras: " + gastoencompras +"lps.");
+            double vmcom= gastoencompras /comprasxdia;
+            double vmven= ganancia / ventasxdia;
+            System.out.println("---------------------------------");
+            System.out.println("valor medio de ventas: "+ vmven);
+            System.out.println("valor medio de compras: "+ vmcom);
+            System.out.println("---------------------------------");
+            //determinar la venta con mayor ganancia
+            if(azucarcompraa>avenacompraa && azucarcompraa> trigocomprao && azucarcompraa>maizcomprao){ 
+                System.out.println("la venta con mayor ganancia fue la azucar con: "+ azucarcompraa + " lps");
+                
+                
+            }else if(avenacompraa>trigocomprao && avenacompraa>maizcomprao){
+                System.out.println("la venta con mayor ganancia fue la avena con: "+ avenacompraa +" lps.");
+                
+                
+            }else if(trigocomprao >maizcomprao){  
+                System.out.println("la venta con mayor ganancia fue el trigo con: "+ trigocomprao+" lps.");
+                
+                
+            }else{
+                   System.out.println("la venta con mayor ganancia fue el maiz con:"+ maizcomprao+ "lps.");  
+                
+            }
+            //compra con mayor gasto wiwiwiwi ayudaporfavorestonoesunmeme
+            if(gastoazucar>gastoavena && gastoazucar> gastotrigo && gastoazucar>gastomaiz){ 
+                System.out.println("la compra con mas gastos fue la azucar con "+ gastoazucar+ "lps.");
+                
+                
+            }else if(gastoavena>gastotrigo && gastoavena>gastomaiz){
+                System.out.println("la compra con mas gastos fue la avena con " + gastoavena + "lps.");
+                
+                
+            }else if(gastotrigo >gastomaiz){  
+                System.out.println("la compra con mas gastos fue el trigo con: "+ gastotrigo + "lps.");
+                
+                
+            }else{
+                   System.out.println("la compra con mas gastos fue el maiz con: "+ gastomaiz + "lps.");  
+                
+            }
+            
+            System.out.println("---------------------------------");
+            
+            if(ventasxdia>=0){
                  //definir cual fue el producto estrella
-            if (compraazucar>compraavena && compraazucar> compratrigo && compraazucar>compramaiz){
+            if(compraazucar>compraavena && compraazucar> compratrigo && compraazucar>compramaiz){
                 
                 produestrella=compraazucar;
                 System.out.println("su produccto estrella fue el azucar con "+ compraazucar + "ventas");
@@ -473,7 +586,7 @@ public class Almendarez_Galatea_proyectotienda {
                 System.out.println("su produccto estrella fue el trigo con "+ compratrigo + "ventas");
             }else{
                produestrella=compramaiz;
-                   System.out.println("su producto estrella fue"+ produestrella +"con "+ compramaiz + " ventas");  
+                   System.out.println("su producto estrella fue el maiz "+ compramaiz + " ventas");  
                 
             }
             }
@@ -482,6 +595,9 @@ public class Almendarez_Galatea_proyectotienda {
             break;
         case 5://cierre de caja-----------------------------------------------------------------------------------------
             System.out.println("---CIERRE DE CAJA---\n");
+            if(opcion==5 ){
+                cajaabi=false;
+            }
             if(dinerocaja<=0){
                 System.out.println("opcion invalida, todavia no hizo nadota en caja");
                 break;
@@ -495,6 +611,7 @@ public class Almendarez_Galatea_proyectotienda {
             switch(respuestabanco){
                 case "si":
                      System.out.println("cuanto dinero desea ingresar al banco??");
+                     System.out.println("(solo puede ingresar un maximo del 60%)");
                 double ingresabanco= obj.nextDouble();
                 if(ingresabanco>maximoban){
                     System.out.println("su cantidad excede el limite que puede ingresar en el banco");
