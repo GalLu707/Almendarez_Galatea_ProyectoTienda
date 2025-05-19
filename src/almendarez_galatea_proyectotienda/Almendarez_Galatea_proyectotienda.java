@@ -531,7 +531,7 @@ public class Almendarez_Galatea_proyectotienda {
                 break;
             }
             System.out.println("REPORTES-------------------------");
-            System.out.println("Dinero actual en la caja: %.2f%n " + dinerocaja);
+            System.out.println("Dinero actual en la caja: " + dinerocaja);
             System.out.println("---------------------------------");
             System.out.println("Numero de compras realizadas en el dia: " + comprasxdia);
             System.out.println("Numero de ventas realizadas en el dia: " + ventasxdia );
@@ -543,8 +543,8 @@ public class Almendarez_Galatea_proyectotienda {
               System.out.println("Ganancias: "+ gananciatotal + "lps.");  
             }       
             System.out.println("---------------------------------");
-            System.out.println("volumen total de ventas: %.2f%n "+ ganancia+ "lps.");
-            System.out.println("volumen total de compras: %.2f%n" + gastoencompras +" lps.");
+            System.out.println("volumen total de ventas: "+ ganancia+ "lps.");
+            System.out.println("volumen total de compras: " + gastoencompras +" lps.");
             double vmcom= gastoencompras /comprasxdia;
             double vmven= ganancia / ventasxdia;
             System.out.println("---------------------------------");
@@ -590,21 +590,21 @@ public class Almendarez_Galatea_proyectotienda {
             
             if(ventasxdia>=0){
                  //definir cual fue el producto estrella
-            if(compraazucar>compraavena && compraazucar> compratrigo && compraazucar>compramaiz){
+            if(azucarcompraa>avenacompraa && azucarcompraa> compratrigo && azucarcompraa>compramaiz){
                 
-                produestrella=compraazucar;
-                System.out.println("su produccto estrella fue el azucar con "+ compraazucar + "ventas");
-            }else if(compraavena>compratrigo && compraavena>compramaiz){
+                produestrella=azucarcompraa;
+                System.out.println("su produccto estrella fue el azucar con "+ azucarcompraa + "ventas");
+            }else if(avenacompraa>trigocomprao && avenacompraa>compramaiz){
                 
-                produestrella=compraavena;
-                System.out.println("su produccto estrella fue la avena con "+ compraavena + "ventas");
-            }else if(compratrigo >compramaiz){
+                produestrella=avenacompraa;
+                System.out.println("su produccto estrella fue la avena con "+ avenacompraa + "ventas");
+            }else if(trigocomprao >maizcomprao){
                 
-                produestrella=compratrigo;
-                System.out.println("su produccto estrella fue el trigo con "+ compratrigo + "ventas");
-            }else if (compramaiz>0){
-               produestrella=compramaiz;
-                   System.out.println("su producto estrella fue el maiz "+ compramaiz + " ventas");  
+                produestrella=trigocomprao;
+                System.out.println("su produccto estrella fue el trigo con "+ trigocomprao + "ventas");
+            }else if (maizcomprao>0){
+               produestrella=maizcomprao;
+                   System.out.println("su producto estrella fue el maiz "+ maizcomprao + " ventas");  
                 
             }else{
                 System.out.println("no hay producto entrella");
