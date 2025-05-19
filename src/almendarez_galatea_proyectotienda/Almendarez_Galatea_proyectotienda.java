@@ -87,6 +87,24 @@ public class Almendarez_Galatea_proyectotienda {
            else {
                System.out.println("su dinero actual es en caja es:." + dinerocaja+ "Lps."); 
            }
+            if (cajaabierta >= 1) {
+                System.out.println("desea agregar dinero a caja (si/no)");
+                String añadirplata = obj.next();
+                if (añadirplata.equals("si")) {
+                    System.out.println("ingrese la cantidad de dinero que quiere agregar");
+                    double masplata = obj.nextDouble();
+                    if (masplata <= 0) {
+                        System.out.println("ingrese una cantidad valida");
+                    } else {
+                        System.out.println("el dinero se ingreso correctamente");
+                        dinerocaja += masplata;
+                        break;
+                    }
+
+                }
+            }
+
+                
            cajaabierta++;
            break; 
            
@@ -133,7 +151,7 @@ public class Almendarez_Galatea_proyectotienda {
             System.out.println("|codigo| Producto | precio |cliente|"
                         + "\n|  1   | Azucar   |   30   |  a/b  |"
                         + "\n|  2   | Avena    |   25   |  a/b  |"
-                        + "\n|  3   | Trigo    |   32   |  a/B  |"
+                        + "\n|  3   | Trigo    |   32   |  a/b  |"
                         + "\n|  4   | Maiz     |   20   |  a/c  |\n ");
             //Validacion de productos que puede comprar el usuario
             System.out.println("----Introduzca el codigo(numero) del producto que desea comprar----");
@@ -320,7 +338,7 @@ public class Almendarez_Galatea_proyectotienda {
             //double impuesto = descuento + calcuim;//este creo que me esta tronando
 
             System.out.println("\n\nimpuesto del 7%");
-            System.out.println("total del impuesto:" + impuesto + " .LPS");//quitarlo luegp
+            System.out.println("total del impuesto:%.2f%n" + impuesto + " .LPS");//quitarlo luegp
             
             double total = descuento + impuesto;
 
@@ -513,7 +531,7 @@ public class Almendarez_Galatea_proyectotienda {
                 break;
             }
             System.out.println("REPORTES-------------------------");
-            System.out.println("Dinero actual en la caja: " + dinerocaja);
+            System.out.println("Dinero actual en la caja: %.2f%n " + dinerocaja);
             System.out.println("---------------------------------");
             System.out.println("Numero de compras realizadas en el dia: " + comprasxdia);
             System.out.println("Numero de ventas realizadas en el dia: " + ventasxdia );
@@ -525,8 +543,8 @@ public class Almendarez_Galatea_proyectotienda {
               System.out.println("Ganancias: "+ gananciatotal + "lps.");  
             }       
             System.out.println("---------------------------------");
-            System.out.println("volumen total de ventas: "+ ganancia+ "lps.");
-            System.out.println("volumen total de compras: " + gastoencompras +"lps.");
+            System.out.println("volumen total de ventas: %.2f%n "+ ganancia+ "lps.");
+            System.out.println("volumen total de compras: %.2f%n" + gastoencompras +" lps.");
             double vmcom= gastoencompras /comprasxdia;
             double vmven= ganancia / ventasxdia;
             System.out.println("---------------------------------");
@@ -584,10 +602,12 @@ public class Almendarez_Galatea_proyectotienda {
                 
                 produestrella=compratrigo;
                 System.out.println("su produccto estrella fue el trigo con "+ compratrigo + "ventas");
-            }else{
+            }else if (compramaiz>0){
                produestrella=compramaiz;
                    System.out.println("su producto estrella fue el maiz "+ compramaiz + " ventas");  
                 
+            }else{
+                System.out.println("no hay producto entrella");
             }
             }
            
